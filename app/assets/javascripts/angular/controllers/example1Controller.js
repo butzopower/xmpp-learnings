@@ -11,7 +11,7 @@ angular.module("XMPPLearnings").controller("example1Controller", function($scope
 
   this.connect = function(jid, password) {
     $scope.logEntries.push('Starting to connect.')
-    var connection = new Strophe.Connection("http://192.168.55.55:5280/http-bind");
+    var connection = new Strophe.Connection("http://192.168.123.45:5280/http-bind");
     connection.connect(jid, password, function(status) {
       console.log(status);
       if (status === Strophe.Status.CONNECTED) {
