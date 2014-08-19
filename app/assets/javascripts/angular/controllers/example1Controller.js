@@ -39,6 +39,7 @@ angular.module("XMPPLearnings").controller("example1Controller", function($scope
 
   function disconnected() {
     log('Connection terminated.');
+    connection = null;
   }
 
   this.connect = function(jid, password) {
