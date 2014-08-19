@@ -1,12 +1,22 @@
 angular.module("XMPPLearnings").controller("example1Controller", function($scope, $timeout) {
   var connection = null;
+  var startTime = null;
 
-  function clearLogs() {
+  function clearLogs(time) {
+    startTime = time || (new Date()).getTime();
     $scope.logEntries = [];
   }
 
-  function log(message) {
-    $scope.logEntries.push(message);
+  function log(message, time) {
+    time = time || (new Date()).getTime();
+    msSinceStart = time - startTime;
+
+    var entry = {
+      since: msSinceStart,
+      message: message
+    };
+
+    $scope.logEntries.push(entry);
   }
 
   function receivePing() {
@@ -43,7 +53,7 @@ angular.module("XMPPLearnings").controller("example1Controller", function($scope
   }
 
   this.connect = function(jid, password) {
-    clearLogs();
+    clearLogs((new Date()).getTime());
     log('Starting to connect.');
     connection = new Strophe.Connection("http://192.168.123.45:5280/http-bind");
     connection.connect(jid, password, function(status) {
