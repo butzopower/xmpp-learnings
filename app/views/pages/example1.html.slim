@@ -1,0 +1,14 @@
+div ng-controller="example1Controller as ctrl"
+  div
+    label for="jid" JID:
+    input#jid type="text" ng-model="jid"
+
+  div
+    label for="password" Password:
+    input#password type="password" ng-model="password"
+
+  button ng-click="ctrl.connect(jid, password)" Connect
+
+  h1 Log
+  div ng-repeat="logEntry in logEntries" style="background-color:lightgray; border: 1px solid grey; padding: 5px; margin: 10px 20px;"
+    | {{logEntry}}

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+source 'https://rails-assets.org'
 
 gem 'rails', '4.1.5'
 gem 'sqlite3'
@@ -13,3 +13,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'high_voltage'
 gem 'slim'
+
+gem 'rails-assets-angular'
+gem 'rails-assets-strophe'
