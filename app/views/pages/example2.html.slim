@@ -1,0 +1,72 @@
+div ng-controller="example2Controller as ctrl"
+  h1 Peek
+
+  #console
+    div ng-repeat="entry in consoleEntries" class="{{entry.type}}" ng-bind-html="entry.html"
+
+  textarea#input
+
+  #buttonbar
+    button#send_button Send Data
+    button#disconnect_button ng-click="ctrl.disconnect()" ng-disabled="!connection" Disconnect
+
+  br
+  br
+
+  #login_dialog
+    label for="jid" JID:
+    input#jid type="text" ng-model="jid"
+
+    label for="password" Password:
+    input#password type="password" ng-model="password"
+
+    button ng-click="ctrl.connect(jid, password)" Connect
+
+
+
+css:
+  body {
+    font-family: Helvetica;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  #console {
+    padding: 10px;
+    height: 300px;
+    border: solid 1px #aaa;
+    background-color: #000;
+    color: #eee;
+    font-family: monospace;
+    overflow: auto;
+  }
+
+  #input {
+    width: 100%;
+    height: 100px;
+    font-family: monospace;
+  }
+
+  .incoming {
+    background-color: #111;
+  }
+
+  textarea.disabled {
+    background-color: #bbb;
+  }
+
+  #buttonbar {
+    margin: 10px;
+  }
+
+  #disconnect_button {
+    float: left;
+    width: 100px;
+  }
+
+  #send_button {
+    float: right;
+    width: 100px;
+  }

@@ -1,1 +1,1 @@
-angular.module('XMPPLearnings', []);
+angular.module('XMPPLearnings', ['ngSanitize']);

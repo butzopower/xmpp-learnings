@@ -15,4 +15,5 @@ gem 'high_voltage'
 gem 'slim'
 
 gem 'rails-assets-angular'
+gem 'rails-assets-angular-sanitize'
 gem 'rails-assets-strophe'
