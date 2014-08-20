@@ -1,4 +1,4 @@
-angular.module("XMPPLearnings").controller("example2Controller", function($scope, $timeout, $prettyXML) {
+angular.module("XMPPLearnings").controller("example2Controller", function($scope, $timeout, $prettyXML, $textToXML) {
   $scope.connection = null;
   $scope.consoleEntries = [];
 
@@ -38,5 +38,15 @@ angular.module("XMPPLearnings").controller("example2Controller", function($scope
   this.disconnect = function() {
     $scope.connection.disconnect();
     $scope.connection = null;
+  };
+
+  this.sendData = function(data) {
+    var xml = $textToXML(data);
+    if (xml) {
+      $scope.connection.send(xml);
+      $scope.input = "";
+    } else {
+      $scope.inputInvalid = true;
+    }
   };
 });

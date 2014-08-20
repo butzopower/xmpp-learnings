@@ -4,10 +4,10 @@ div ng-controller="example2Controller as ctrl"
   #console
     div ng-repeat="entry in consoleEntries" class="{{entry.type}}" ng-bind-html="entry.html"
 
-  textarea#input
+  textarea#input ng-model="input" ng-class="{invalid: inputInvalid}" ng-change="inputInvalid = false;"
 
   #buttonbar
-    button#send_button Send Data
+    button#send_button ng-click="ctrl.sendData(input)" ng-disabled="!connection" Send Data
     button#disconnect_button ng-click="ctrl.disconnect()" ng-disabled="!connection" Disconnect
 
   br
@@ -50,7 +50,7 @@ css:
   }
 
   .incoming {
-    background-color: #111;
+    background-color: #1b1b1b;
   }
 
   textarea.disabled {
@@ -69,5 +69,9 @@ css:
   #send_button {
     float: right;
     width: 100px;
+  }
+
+  .invalid {
+    background-color: #faa;
   }
 
