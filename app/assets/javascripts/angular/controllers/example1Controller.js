@@ -9,7 +9,7 @@ angular.module("XMPPLearnings").controller("example1Controller", function($scope
 
   function log(message, time) {
     time = time || (new Date()).getTime();
-    msSinceStart = time - startTime;
+    var msSinceStart = time - startTime;
 
     var entry = {
       since: msSinceStart,
