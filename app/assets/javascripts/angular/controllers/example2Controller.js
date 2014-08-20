@@ -40,13 +40,33 @@ angular.module("XMPPLearnings").controller("example2Controller", function($scope
     $scope.connection = null;
   };
 
-  this.sendData = function(data) {
-    var xml = $textToXML(data);
-    if (xml) {
-      $scope.connection.send(xml);
-      $scope.input = "";
-    } else {
+  this.sendData = function(input) {
+    var error = false;
+    if (input.length > 0) {
+      if (input[0] === '<') {
+        var xml = $textToXML(input);
+        if (xml) {
+          $scope.connection.send(xml);
+        } else {
+          error = true;
+        }
+      } else if (input[0] === '$') {
+        try {
+          var builder = eval(input);
+          $scope.connection.send(builder);
+        } catch (e) {
+          console.log(e);
+          error = true;
+        }
+      } else {
+        error = true;
+      }
+    }
+
+    if (error) {
       $scope.inputInvalid = true;
+    } else {
+      $scope.input = "";
     }
   };
 });
