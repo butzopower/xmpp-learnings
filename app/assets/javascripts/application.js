@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-sanitize
+//= require angularjs-scroll-glue
 //= require strophe
 //= require angular/app
 //= require_tree .

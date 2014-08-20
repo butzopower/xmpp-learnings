@@ -1,7 +1,7 @@
 div ng-controller="example2Controller as ctrl"
   h1 Peek
 
-  #console
+  #console{scroll-glue}
     div ng-repeat="entry in consoleEntries" class="{{entry.type}}" ng-bind-html="::entry.html"
 
   textarea#input ng-model="input" ng-class="{invalid: inputInvalid}" ng-change="inputInvalid = false;"
