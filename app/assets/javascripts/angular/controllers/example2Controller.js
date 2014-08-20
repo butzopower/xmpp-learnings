@@ -1,4 +1,4 @@
-angular.module("XMPPLearnings").controller("example2Controller", function($scope, $timeout) {
+angular.module("XMPPLearnings").controller("example2Controller", function($scope, $timeout, $prettyXML) {
   $scope.connection = null;
   $scope.consoleEntries = [];
 
@@ -15,8 +15,7 @@ angular.module("XMPPLearnings").controller("example2Controller", function($scope
   function showTraffic(body, type) {
     if (body.childNodes.length > 0 ) {
       angular.forEach(body.childNodes, function(node) {
-        var xmlString = Strophe.serialize(node);
-        var html = xml2html(xmlString);
+        var html = $prettyXML(node);
         logToConsole(html, type);
       });
     }

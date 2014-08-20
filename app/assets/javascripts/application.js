@@ -15,4 +15,5 @@
 //= require angular
 //= require angular-sanitize
 //= require strophe
+//= require angular/app
 //= require_tree .
