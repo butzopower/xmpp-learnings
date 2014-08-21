@@ -39,13 +39,13 @@ function prettyXML(xml, level) {
     result.push("<span class='xml_punc'>&gt;</span></div>");
 
     // children
-    angular.forEach(xml.childNodes, function () {
-      if (this.nodeType === 1) {
-        result.push(prettyXML(this, level + 1));
-      } else if (this.nodeType === 3) {
+    angular.forEach(xml.childNodes, function (node) {
+      if (node.nodeType === 1) {
+        result.push(prettyXML(node, level + 1));
+      } else if (node.nodeType === 3) {
         result.push("<div class='xml_text xml_level" +
           (level + 1) + "'>");
-        result.push(this.nodeValue);
+        result.push(node.nodeValue);
         result.push("</div>");
       }
     });
