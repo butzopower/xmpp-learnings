@@ -1,0 +1,29 @@
+#example4 ng-controller="example4Controller as ctrl"
+  h1 Gab
+
+  #toolbar
+    button add contact..
+    | ||
+    button chat with..
+    | ||
+    button disconnect
+
+  #chat-area
+
+  #roster-area
+    ul
+      li ng-repeat="contact in contacts"
+        .roster-contact.offline
+          .roster-name
+            | {{ contact.name }}
+          .roster-jid
+            | {{ contact.jid }}
+
+  #login_dialog
+    label for="jid" JID:
+    input#jid type="text" ng-model="jid"
+
+    label for="password" Password:
+    input#password type="password" ng-model="password"
+
+    button ng-click="ctrl.connect(jid, password)" Connect
