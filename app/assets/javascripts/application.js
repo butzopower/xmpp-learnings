@@ -13,8 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
+//= require angular-rails-templates
 //= require angular-sanitize
 //= require angularjs-scroll-glue
+//= require ngDialog
 //= require strophe
 //= require angular/app
 //= require_tree .
+//= require_tree ../templates

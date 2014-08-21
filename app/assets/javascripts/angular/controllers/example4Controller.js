@@ -1,4 +1,4 @@
-angular.module("XMPPLearnings").controller("example4Controller", function($scope, $timeout) {
+angular.module("XMPPLearnings").controller("example4Controller", function($scope, $timeout, ngDialog) {
   var connection = null;
   $scope.contacts = {};
   $scope.connected = false;
@@ -22,6 +22,7 @@ angular.module("XMPPLearnings").controller("example4Controller", function($scope
   }
 
   function presenceUpdated(presence) {
+    console.log(presence);
     $timeout(function() {
       var presenceType = $(presence).attr('type');
       var from = $(presence).attr('from');
@@ -38,8 +39,9 @@ angular.module("XMPPLearnings").controller("example4Controller", function($scope
     return true;
   }
 
-  function initialRosterReceived(iq) {
+  function rosterReceived(iq) {
     $timeout(function() {
+      $scope.contacts = {};
       $(iq).find('item').each(function() {
         var jid = getBareJid($(this).attr('jid'));
         var name = $(this).attr('name') || jid;
@@ -48,15 +50,33 @@ angular.module("XMPPLearnings").controller("example4Controller", function($scope
         $scope.contacts[jid] = contact;
       })
     });
+  }
 
-    connection.addHandler(presenceUpdated, null, "presence");
-    connection.send($pres());
+  function fetchRoster() {
+    var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
+    connection.sendIQ(iq, rosterReceived);
+  }
+
+  function addContact(contact) {
+    var iq = $iq({type: "set"}).c("query", {xmlns: "jabber:iq:roster"})
+      .c("item", contact);
+    connection.sendIQ(iq);
+
+    var subscribe = $pres({to: contact.jid, "type": "subscribe"});
+    connection.send(subscribe);
   }
 
   function connected() {
     $scope.connected = true;
-    var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
-    connection.sendIQ(iq, initialRosterReceived);
+
+    fetchRoster();
+
+    connection.addHandler(presenceUpdated, null, "presence");
+    connection.send($pres());
+
+    connection.addHandler(function() {
+      fetchRoster(); return true;
+    }, "jabber:iq:roster", "iq", "set");
   }
 
   function disconnected() {
@@ -79,5 +99,18 @@ angular.module("XMPPLearnings").controller("example4Controller", function($scope
 
   this.disconnect = function() {
     connection.disconnect();
+  };
+
+  this.openAddContactDialog = function() {
+    var dialog = ngDialog.open({
+      template: 'addContactDialog.html'
+    });
+
+    dialog.closePromise.then(function(dialog) {
+      var contact = dialog.value;
+      $timeout(function() {
+        addContact(contact);
+      });
+    });
   };
 });

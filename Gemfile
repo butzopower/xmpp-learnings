@@ -18,3 +18,6 @@ gem 'rails-assets-angular', '1.3.0.beta.13'
 gem 'rails-assets-angular-sanitize', '1.3.0.beta.13'
 gem 'rails-assets-strophe'
 gem 'rails-assets-angularjs-scroll-glue'
+gem 'rails-assets-ngDialog'
+
+gem 'angular-rails-templates'
