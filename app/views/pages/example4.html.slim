@@ -6,14 +6,14 @@
     | ||
     button chat with..
     | ||
-    button disconnect
+    button ng-disabled="!connected" ng-click="ctrl.disconnect()" disconnect
 
   #chat-area
 
   #roster-area
     ul
       li ng-repeat="contact in contacts"
-        .roster-contact.offline
+        .roster-contact class="{{contact.status}}"
           .roster-name
             | {{ contact.name }}
           .roster-jid
@@ -26,4 +26,4 @@
     label for="password" Password:
     input#password type="password" ng-model="password"
 
-    button ng-click="ctrl.connect(jid, password)" Connect
+    button ng-disabled="connected" ng-click="ctrl.connect(jid, password)" Connect
